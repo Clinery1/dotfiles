@@ -18,6 +18,6 @@ augroup Markdown
     au BufReadPost *.md set spell wrap linebreak nofoldenable
 augroup END
 ]])
-vim.cmd("autocmd Filetype markdown LanguageToolSetUp")
+-- vim.cmd("autocmd Filetype markdown LanguageToolSetUp")
 vim.cmd("autocmd BufRead,BufNewFile *.awf set ft=awf")
 vim.cmd("autocmd BufRead,BufNewFile,BufEnter *.rom set binary ft=xxd")
