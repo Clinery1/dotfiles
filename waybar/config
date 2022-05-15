@@ -1,0 +1,107 @@
+// vim:ft=json
+{
+    "layer": "top",
+    "position": "top",
+    "height": 20,
+    "spacing": 0,
+    "modules-left": ["sway/mode","custom/arrow10","sway/window","custom/arrow9"],
+    "modules-center": [],
+    "modules-right": ["custom/arrow0","custom/trashcount","custom/arrow1","network","custom/arrow2","cpu","custom/arrow3","disk#root","disk#home","custom/arrow4","memory","custom/arrow5","temperature","custom/arrow6","battery","custom/arrow7","pulseaudio","custom/arrow8","clock"],
+    "custom/arrow0":{"interval":"once","format":""},
+    "custom/arrow1":{"interval":"once","format":""},
+    "custom/arrow2":{"interval":"once","format":""},
+    "custom/arrow3":{"interval":"once","format":"","tooltip":false},
+    "custom/arrow4":{"interval":"once","format":"","tooltip":false},
+    "custom/arrow5":{"interval":"once","format":"","tooltip":false},
+    "custom/arrow6":{"interval":"once","format":"","tooltip":false},
+    "custom/arrow7":{"interval":"once","format":"","tooltip":false},
+    "custom/arrow8":{"interval":"once","format":"","tooltip":false},
+    "custom/arrow9":{"interval":"once","format":"","tooltip":false},
+    "custom/arrow10":{"interval":"once","format":"","tooltip":false},
+    "custom/trashcount": {
+        "format": " {}",
+        "exec": "$HOME/.bin/trash_count",
+        "interval": 60,
+        "tooltip": false
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/window": {
+        "rewrite": {
+           "(.*) - Vivaldi": "爵 $1",
+           "v (.*)": " [$1]",
+           "fish (.*)": " [$1]",
+           "ranger (.*)": " [$1]"
+        },
+        "tooltip": false
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%m-%d-%Y}"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false,
+        "interval": 5
+    },
+    "disk#root": {
+        "format": " {used}/{total};{percentage_used}%",
+        "path": "/"
+    },
+    "disk#home": {
+        "format": "  {used}/{total};{percentage_used}%",
+        "path": "/home"
+    },
+    "memory": {
+        "format": " {percentage}% | 易 {swapPercentage}%",
+        "tooltip": false
+    },
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "critical-threshold": 90,
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["","","","",""],
+        "interval": 5,
+        "tooltip": false
+    },
+    "battery": {
+        "states": {
+            "good": 80,
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": [" "," "," "," "," "],
+        "tooltip": false
+    },
+    "network": {
+        "format-wifi": "{essid} ",
+        "format-ethernet": "ETH",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "OFF 睊",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "scroll-step": 1,
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": "{icon} 婢 {format_source}",
+        "format-muted": "婢 {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "ﴓ",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}

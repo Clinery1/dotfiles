@@ -1,0 +1,148 @@
+@define-color battery #26A65B;
+@define-color cpu #2ecc71;
+@define-color memory #9b59b6;
+@define-color disk #964B00;
+@define-color network #2980b9;
+@define-color pulseaudio #f1c40f;
+@define-color temp #f0932b;
+@define-color temp-crit #eb4d4b;
+@define-color trashcount #724bc5;
+@define-color clock #64727D;
+@define-color sway-window #3fafbf;
+@define-color sway-mode #64727D;
+* {
+    font-family: "mononoki Nerd Font Mono", monospace;
+    font-size: 12px;
+}
+window#waybar {
+    background-color: rgba(0,0,0,0.0);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+window#waybar.hidden {
+    opacity: 0.2;
+}
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#network,
+#pulseaudio,
+#custom-trashcount,
+#window,
+#mode {
+    padding: 0 5px;
+    color: #ffffff;
+}
+#clock {
+    background-color: @clock;
+}
+#battery {
+    background-color: @battery;
+    color: #ffffff;
+}
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#window {
+    background-color: @sway-window;
+    color: #000000;
+}
+#mode {
+    background-color: @sway-mode;
+    font-size:14px;
+    font-variant: small-caps;
+}
+#cpu {
+    background-color: @cpu;
+    color: #000000;
+}
+#memory {
+    background-color: @memory;
+}
+#disk {
+    background-color: @disk;
+}
+#network {
+    background-color: @network;
+}
+#pulseaudio {
+    background-color: @pulseaudio;
+    color: #000000;
+}
+#temperature {
+    background-color: @temp;
+}
+#custom-trashcount {
+    background-color: @trashcount;
+}
+#custom-arrow0 {
+    font-size: 16px;
+    color: @trashcount;
+    background: transparent;
+}
+#custom-arrow1 {
+    font-size: 16px;
+    color: @network;
+    background: @trashcount;
+}
+#custom-arrow2 {
+    font-size: 16px;
+    color: @cpu;
+    background: @network;
+}
+#custom-arrow3 {
+    font-size: 16px;
+    color: @disk;
+    background: @cpu;
+}
+#custom-arrow4 {
+    font-size: 16px;
+    color: @memory;
+    background: @disk;
+}
+#custom-arrow5 {
+    font-size: 16px;
+    color: @temp;
+    background: @memory;
+}
+#custom-arrow6 {
+    font-size: 16px;
+    color: @battery;
+    background: @temp;
+}
+#custom-arrow7 {
+    font-size: 16px;
+    color: @pulseaudio;
+    background: @battery;
+}
+#custom-arrow8 {
+    font-size: 16px;
+    color: @clock;
+    background: @pulseaudio;
+}
+#custom-arrow9 {
+    font-size: 16px;
+    color: @sway-window;
+    background: transparent;
+}
+#custom-arrow10 {
+    font-size: 16px;
+    color: @sway-mode;
+    background: @sway-window;
+}
