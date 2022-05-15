@@ -1,0 +1,61 @@
+global e=2.71828182845904523536028747135266249775724709369995;
+global g=9.8;
+global G=6.67430*(10^-11);
+define getG(m1,m2,d,F) {
+    local G=F/((m1*m2)/(d^2));
+    local x=0;
+    while (G*10<10) {
+        G*=10;x-=1;
+    }
+    printf("G=%d*10^%d\n",G,x);
+}
+define rad(o) {
+    return o*(pi()/180);
+}
+define deg(o) {
+    return o*(180/pi());
+}
+define permutations(items,numberOfWays) {
+    return items!/(items-numberOfWays)!;
+}
+define combinations(items,numberOfWays) {
+    return items!/((numberOfWays!)*(items-numberOfWays)!);
+}
+define combinationTotal(items) {
+    local total=0;
+    for (local i=1;i<items+1;i+=1) {
+        total+=combinations(items,i);
+    }
+    return total;
+}
+define permutationTotal(items) {
+    local total=0;
+    for (local i=1;i<items+1;i+=1) {
+        total+=permutations(items,i);
+    }
+    return total;
+}
+define KE(mass,velocity) {
+    return 0.5*mass*(velocity^2);
+}
+define PE(mass,height,gravity=g) {
+    return mass*gravity*height;
+}
+define vFromKE(KE,mass) {
+    return sqrt((2*KE)/mass);
+}
+define yFromPE(PE,mass,gravity=g) {
+    return PE/(mass*gravity);
+}
+define vFromY(height,gravity=g) {
+    return vFromKE(PE(1,height),1);
+}
+define yFromV(velocity,gravity=g) {
+    return yFromPE(KE(1,velocity),1);
+}
+define sind(degrees) {
+    return sin(rad(degrees));
+}
+define cosd(degrees) {
+    return cos(rad(degrees));
+}

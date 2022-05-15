@@ -1,0 +1,40 @@
+swipe:
+  3:
+    up:
+      command: "pactl set-sink-volume @DEFAULT_SINK@ +1db"
+    down:
+      command: "pactl set-sink-volume @DEFAULT_SINK@ -1db"
+    left:
+      interval: 1.0
+      sendkey: "LEFTALT+LEFT"
+    right:
+      interval: 1.0
+      sendkey: "LEFTALT+RIGHT"
+  4:
+    up:
+      command: "brightnessctl set +1%"
+    down:
+      command: "brightnessctl set 1%-"
+    left:
+      interval: 1.0
+      sendkey: "LEFTCTRL+LEFTSHIFT+TAB"
+    right:
+      interval: 1.0
+      sendkey: "LEFTCTRL+TAB"
+
+rotate:
+  2:
+    clockwise:
+      sendkey: "LEFTCTRL+LEFTSHIFT+T"
+    counterclockwise:
+      sendkey: "LEFTCTRL+W"
+
+threshold:
+  swipe: 0.2
+  pinch: 0.5
+  rotate: 0.5
+
+interval:
+  swipe: 0.3
+  pinch: 0.4
+  rotate: 1.0

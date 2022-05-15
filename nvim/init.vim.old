@@ -1,0 +1,195 @@
+syntax on
+set nocompatible
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set showmatch
+set formatoptions+=o
+set number
+set nowrap
+set mouse=a
+set signcolumn=auto
+" Enables the powerline fonts
+let g:airline_powerline_fonts=1
+" Sets the theme
+let g:airline_theme='deus'
+" This is to change the mode names to single letters
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'c'  : 'C',
+    \ 'i'  : 'I',
+    \ 'ic' : 'I',
+    \ 'ix' : 'I',
+    \ 'n'  : 'N',
+    \ 'ni' : 'N',
+    \ 'no' : 'N',
+    \ 'R'  : 'R',
+    \ 'Rv' : 'R',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '^S' : 'S',
+    \ 't'  : 'T',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '^V' : 'V',
+\ }
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_section_x = ''
+
+
+" Nerd tree (file display)
+let g:NERDTreeWinSize=20
+let g:NERDTreeWinPos="right"
+let g:NERDTreeCustomOpenArgs={'file':{'reuse':'all','where':'t','keepopen':1}}
+set rtp+=/home/clinery/.vim/bundle/Vundle.vim
+
+" minimap
+" hi MiniMap ctermbg=239 ctermfg=15 gui=undercurl guisp=Blue
+let g:minimap_width = 10
+"let g:minimap_auto_start = 1
+"let g:minimap_auto_start_win_enter = 0
+" let g:minimap_highlight="MiniMap"
+
+" language tool spell checker
+let g:languagetool_server_command='/bin/languagetool --http'
+let g:languagetool={
+\   'markdown':{
+\       'enabledRules':'',
+\       'disabledRules':'',
+\       'enabledCategories':'',
+\       'disabledCategories':'',
+\       'language':'en-US'
+\   },
+\}
+
+" Plugins (uses vundle)
+" filetype off
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'rust-lang/rust.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'udalov/kotlin-vim'
+Plugin 'jreybert/vimagit'
+Plugin 'tpope/vim-fugitive'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'tikhomirov/vim-glsl'
+" Plugin 'dag/vim-fish'
+Plugin 'habamax/vim-godot'
+Plugin 'ryanoasis/vim-devicons'
+" Plugin 'wfxr/minimap.vim'
+Plugin 'vigoux/LanguageTool.nvim'
+Plugin 'fidian/hexmode'
+Plugin 'neovim/nvim-lspconfig'
+Plugin 'glacambre/firenvim'
+" Plugin 'codota/tabnine-vim'
+Plugin 'stevearc/vim-arduino'
+call vundle#end()
+"filetype plugin indent on
+
+
+lua require'lspconfig'.denols.setup{}
+" lua require'lspconfig'.rust_analyzer.setup{}
+lua require'lspconfig'.rls.setup{}
+lua require'lspconfig'.svls.setup{}
+lua require'lspconfig'.clangd.setup{}
+
+
+" Custom functions
+function SwitchNerdTree()
+    if exists('b:NERDTree') && b:NERDTree.isTabTree()
+        wincmd p
+        echo "Exited NERDTree"
+    else
+        NERDTreeFocus
+        echo "Entered NERDTree"
+    endif
+endfunction
+
+
+" Maps for insert mode
+imap <C-Q> <ESC>:quitall!<CR>
+imap <S-TAB> <ESC><<i
+imap <F3> <ESC>:call LanguageClient#explainErrorAtPoint()<CR>a
+imap <F4> •
+imap <C-^> <ESC>^i
+imap <C-r> <ESC>:call LanguageClient#explainErrorAtPoint()<CR>a
+imap <C-/> <Esc>^i// 
+imap <C-s> <ESC>:w<CR>a
+imap <C-t> <ESC>:tabedit<CR>
+imap <C-Down> <ESC><C-w><Down>i
+imap <C-Up> <ESC><C-w><Up>i
+imap <C-Right> <ESC><C-w><Right>i
+imap <C-Left> <ESC><C-w><Left>i
+
+" Maps for normal mode
+map <C-/> ^i// 
+map ; :call SwitchNerdTree()<CR>
+map <C-n> :NERDTreeClose<CR>
+map <TAB> :tabnext<CR>
+map t :tabedit<CR>
+map <A-r> :w<CR>:tabedit<CR>:terminal fish ./run<CR>i
+map <A-b> :w<CR>:tabedit<CR>:terminal fish ./build<CR>i
+map <C-Left> :vertical resize +1<CR>
+map <C-Right> :vertical resize -1<CR>
+map <C-Up> :resize -1<CR>
+map <C-Down> :resize +1<CR>
+map <S-Up> :set splitbelow<CR>:split<CR>
+map <S-Right> :set splitright<CR>:vsplit<CR>
+map <S-Down> :set splitbelow&<CR>:split<CR>
+map <S-Left> :set splitright&<CR>:vsplit<CR>
+"map q :MinimapClose<CR>:q<CR>
+map q :q<CR>
+map Q :quitall!<CR>
+map w :w<CR>
+map <S-TAB> :tabNext<CR>
+" this is supposed to have a trailing white space
+map e :e 
+map ff :foldclose<CR>
+map F :foldopen<CR>
+map <F3> :call LanguageClient#explainErrorAtPoint()<CR>
+map k :call LanguageClient#textDocument_hover()<CR>
+map T :call LanguageClient#textDocument_hover()<CR>
+map B :buffers<CR>
+map b :buffer
+
+
+" Auto command buffers. Executes things when actions are taken on buffers
+"autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif  " closes when nerdtree is the last thing open
+"autocmd BufWinEnter * silent NERDTreeMirror
+" autocmd BufWinEnter *.* Minimap
+" autocmd BufEnter *.* Minimap
+" autocmd BufWinLeave *.* MinimapClose
+"autocmd VimEnter * NERDTree | wincmd p
+autocmd BufNewFile,BufRead,VimEnter,BufEnter *.asm  set ft=nasm
+autocmd BufNewFile,BufRead,VimEnter,BufEnter *.s  set ft=asm
+autocmd BufNewFile,BufRead,VimEnter,BufEnter *.idea  set ft=markdown
+autocmd BufNewFile,BufRead,VimEnter,BufEnter *.toml  set ft=cfg
+autocmd BufNewFile,BufRead,VimEnter,BufEnter *.fish  set ft=fish
+autocmd BufNewFile,BufRead,VimEnter,BufEnter *.glsl  set ft=glsl
+autocmd BufNewFile,BufRead,VimEnter,BufEnter *.gd  set ft=gdscript noexpandtab
+" run a C file
+autocmd BufEnter,BufRead *.c map <A-r> :execute 'let file="' expand('%:t') '"'<CR>:w<CR>:tabedit<CR>:execute "terminal ~/.bin/run_c_file --quiet " file<CR>i
+" run a C++ file
+autocmd BufEnter,BufRead *.cpp map <A-r> :execute 'let file="' expand('%:t') '"'<CR>:w<CR>:tabedit<CR>:execute "terminal ~/.bin/run_cpp_file --quiet " file<CR>i
+" convert a markdown file to a PDF file
+autocmd BufEnter,BufRead *.md map <A-b> :execute 'let file="' expand('%:t') '"'<CR>:w<CR>:tabedit<CR>:execute "terminal md_to_pdf " file<CR>i
+augroup Markdown
+    au!
+    au BufReadPre  *.md set spell wrap linebreak nofoldenable
+    au BufReadPost *.md set spell wrap linebreak nofoldenable
+augroup END
+autocmd Filetype markdown LanguageToolSetUp
+autocmd BufRead,BufNewFile *.awf set ft=awf
+autocmd BufRead,BufNewFile,BufEnter *.rom set binary ft=xxd
+
+
+" Fix the awful coloring of warnings (bright blue BG white FG) and change the
+" red of errors to a different color
+hi SpellCap ctermbg=17 gui=undercurl guisp=Blue
+hi SpellBad ctermbg=88 gui=undercurl guisp=Red
+hi LanguageToolGrammarError ctermbg=17
+hi LanguageToolSpellingError ctermbg=88
