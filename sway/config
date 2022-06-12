@@ -82,7 +82,10 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+F12 exec $lock & systemctl hibernate
 
 # Poweroff (can't believe I lived without this for weeks!)
-bindsym $mod+F12 exec swaynag -t warning -m 'Do you really want to turn off the computer?' -B 'Yes' 'systemctl poweroff'
+bindsym $mod+F12 exec swaynag -t warning -m 'Shutdown?' -B 'Yes' 'systemctl poweroff'
+
+# Reboot
+bindsym $mod+Alt+F12 exec swaynag -t warning -m 'Restart?' -B 'Yes' 'systemctl restart'
 
 mode "resize" {
     # left will shrink the containers width
