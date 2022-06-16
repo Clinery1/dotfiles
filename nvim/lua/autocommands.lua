@@ -13,3 +13,4 @@ vim.cmd("autocmd BufEnter,BufRead *.md set spell wrap linebreak nofoldenable tex
 -- vim.cmd("autocmd Filetype markdown LanguageToolSetUp")
 vim.cmd("autocmd BufRead,BufNewFile *.awf set ft=awf")
 vim.cmd("autocmd BufRead,BufNewFile,BufEnter *.rom set binary ft=xxd")
+vim.cmd("autocmd BufNewFile,BufEnter *.cppl set ft=cppl")

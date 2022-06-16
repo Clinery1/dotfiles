@@ -1,4 +1,5 @@
 return require('packer').startup(function(use)
+    use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
     use "vim-airline/vim-airline"
     use "vim-airline/vim-airline-themes"
@@ -9,6 +10,6 @@ return require('packer').startup(function(use)
     use "godlygeek/tabular"
     use "ryanoasis/vim-devicons"
     use "neovim/nvim-lspconfig"
-    use {"nvim-treesitter/nvim-treesitter",cmd=":TSUpdate"}
+    use "nvim-treesitter/nvim-treesitter"
     use "Yagua/nebulous.nvim"
 end)

@@ -28,6 +28,23 @@ opt.signcolumn="auto:2"
 
 
 -- plugin config things
+-- treesitter
+require'nvim-treesitter.configs'.setup {
+    highlight={
+        enable=true,
+    },
+}
+local parser_config=require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.cppl={
+    install_info={
+        url="~/projects/languages/tree-sitter-cppl",
+        files={"src/parser.c","src/scanner.c"},
+        generate_requires_npm=false,
+        requires_generate_from_grammar=false,
+    },
+    filetype="cppl",
+}
+local treesitter_queries=require("vim.treesitter.query")
 -- LSP configs
 local lspconfig=require("lspconfig")
 lspconfig.denols.setup{}
@@ -91,7 +108,7 @@ require("nebulous").setup {
         terminal_colors=false,
     },
     italic={
-        comments=true,
+        comments=false,
         keywords=true,
         functions=false,
         variables=false,
