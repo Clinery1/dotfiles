@@ -108,6 +108,7 @@ require("nebulous").setup {
         terminal_colors=false,
     },
     italic={
+        builtins=true,
         comments=false,
         keywords=true,
         functions=false,
