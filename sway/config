@@ -166,6 +166,8 @@ exec /home/clinery/.local/share/gem/ruby/3.0.0/bin/fusuma
 output eDP-1 scale 1
 output DVI-D-1 scale 1
 output DP-6 scale 1
+output DP-2 scale 1
+output DP-3 scale 1
 
 # Display config
 # Since we disable the laptop screen when the eGPU is plugged in, we don't have to worry about
@@ -175,7 +177,9 @@ output DVI-D-1 pos 1920 0 res 1920x1080
 # center
 output DP-6 pos 0 0 res 1920x1080
 # disabled
-output eDP-1 pos 0 0 res 2256x1504
+output eDP-1 pos 3840 0 res 2256x1504
+output DP-2 pos 1920 0 res 1920x1080
+output DP-3 pos 0 0 res 1920x1080
 
 # include the default sway configs
 include /etc/sway/config.d/*
