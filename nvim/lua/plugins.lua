@@ -12,4 +12,5 @@ return require("packer").startup(function(use)
     use "neovim/nvim-lspconfig"
     use "nvim-treesitter/nvim-treesitter"
     use "Clinery1/nebulous.nvim"
+    use "terrortylor/nvim-comment"
 end)

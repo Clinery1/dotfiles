@@ -45,11 +45,19 @@ parser_config.cppl={
     filetype="cppl",
 }
 local treesitter_queries=require("vim.treesitter.query")
+
 -- LSP configs
 local lspconfig=require("lspconfig")
 lspconfig.denols.setup{}
 lspconfig.rls.setup{}
 lspconfig.svls.setup{}
+
+-- nvim-comment
+local commenter=require('nvim_comment').setup({
+    marker_padding=true,
+    comment_empty=false,
+    create_mappings=false,
+})
 
 -- airline theme stuff
 globals.airline_powerline_fonts=true
