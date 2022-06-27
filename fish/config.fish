@@ -89,7 +89,11 @@ export VISUAL=nvim
 export EDITOR=nvim
 export TZ="America/New_York"
 export PICO_SDK_PATH="$HOME/github/pico-sdk"
-export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json"
+if lsmod|grep -q "nvidia"
+    export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json"
+else
+    export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/intel_icd.x86_64.json"
+end
 export WIFI_INTERFACE="wlan0"
 
 # aliases
