@@ -178,7 +178,7 @@ output DVI-D-1 pos 1920 0 res 1920x1080
 output DP-6 pos 0 0 res 1920x1080
 # disabled
 output eDP-1 pos 3840 0 res 2256x1504
-output DP-2 pos 1920 0 res 1920x1080
+output DP-1 pos 1920 0 res 1920x1080
 output DP-3 pos 0 0 res 1920x1080
 
 # include the default sway configs

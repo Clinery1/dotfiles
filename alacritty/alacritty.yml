@@ -11,7 +11,7 @@ font:
   bold_italic:
     family: "mononoki Nerd Font Mono"
     style: BoldItalic
-  size: 14
+  size: 13
 colors:
   primary:
     background: '#000000'

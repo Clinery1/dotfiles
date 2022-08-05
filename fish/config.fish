@@ -134,7 +134,7 @@ alias rm=trash
 
 
 function school
-    set DEFAULT "college/s2"
+    set DEFAULT ""
     function goTo
         if [ -d "$HOME/school/$argv[1]/$argv[2]" ]
             cd $HOME/school/$argv[1]/$argv[2]
