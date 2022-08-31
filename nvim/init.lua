@@ -29,9 +29,16 @@ opt.signcolumn="auto:2"
 
 -- plugin config things
 -- treesitter
-require'nvim-treesitter.configs'.setup {
+require"nvim-treesitter.configs".setup {
     highlight={
         enable=true,
+    },
+    rainbow={
+        enable=true,
+        max_file_lines=nil,
+    },
+    indent={
+        enable=false,
     },
 }
 local parser_config=require("nvim-treesitter.parsers").get_parser_configs()
@@ -44,7 +51,29 @@ parser_config.cppl={
     },
     filetype="cppl",
 }
+parser_config.docbuilder={
+    install_info={
+        url="~/projects/languages/tree-sitter-docbuilder",
+        files={"src/parser.c","src/scanner.c"},
+        generate_requires_npm=false,
+        requires_generate_from_grammar=false,
+    },
+    filetype="docbuild",
+}
+parser_config.fanasm={
+    install_info={
+        url="~/projects/languages/vm_langs/tree-sitter-fanasm",
+        files={"src/parser.c","src/scanner.c"},
+        generate_requires_npm=false,
+        requires_generate_from_grammar=false,
+    },
+    filetype="fanasm",
+}
 local treesitter_queries=require("vim.treesitter.query")
+
+-- spellsitter (treesitter-aware spell checking)
+local spellsitter=require("spellsitter")
+spellsitter.setup()
 
 -- LSP configs
 local lspconfig=require("lspconfig")
@@ -53,7 +82,7 @@ lspconfig.rls.setup{}
 lspconfig.svls.setup{}
 
 -- nvim-comment
-local commenter=require('nvim_comment').setup({
+local commenter=require("nvim_comment").setup({
     marker_padding=true,
     comment_empty=false,
     create_mappings=false,
@@ -62,23 +91,23 @@ local commenter=require('nvim_comment').setup({
 -- airline theme stuff
 globals.airline_powerline_fonts=true
 globals.airline_mode_map={
-    ["__"]='-',
-    ["c"]='C',
-    ["i"]='I',
-    ["ic"]='I',
-    ["ix"]='I',
-    ["n"]='N',
-    ["ni"]='N',
-    ["no"]='N',
-    ["R"]='R',
-    ["Rv"]='R',
-    ["s"]='S',
-    ["S"]='S',
-    ["^S"]='S',
-    ["t"]='T',
-    ["v"]='V',
-    ["V"]='V',
-    ["^V"]='V',
+    ["__"]="-",
+    ["c"]="C",
+    ["i"]="I",
+    ["ic"]="I",
+    ["ix"]="I",
+    ["n"]="N",
+    ["ni"]="N",
+    ["no"]="N",
+    ["R"]="R",
+    ["Rv"]="R",
+    ["s"]="S",
+    ["S"]="S",
+    ["^S"]="S",
+    ["t"]="T",
+    ["v"]="V",
+    ["V"]="V",
+    ["^V"]="V",
 }
 globals.airline_section_x=""
 vim.cmd("let g:airline#extensions#tabline#enabled=1")   -- there is no obvious alternative, so we are just running a vimscript command
@@ -96,7 +125,7 @@ globals.NERDTreeCustomOpenArgs={
 }
 vim.cmd([[
 function SwitchNerdTree()
-    if exists('b:NERDTree') && b:NERDTree.isTabTree()
+    if exists("b:NERDTree") && b:NERDTree.isTabTree()
         wincmd p
         echo "Left NERDTree"
     else
