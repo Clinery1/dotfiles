@@ -23,25 +23,25 @@ function fish_greeting
                 end
             end
             if $XFCE
-                while true
-                    read egpu_toggle -P "Set eGPU primary or off(default)? "
-                    if [ "$egpu_toggle" = "primary" ]
-                        if lsmod|grep -q nouveau
-                            echo "Please reboot. The nouveau module cannot be removed."
-                            exit 1
-                        end
-                        if cat /etc/X11/xorg.conf.d/20-intel.conf|grep -qv "^#"
-                            # a script I wrote to enable/disable my eGPU. it should be updated.
-                            sudo egpu primary
-                        end
-                        break
-                    else if [ "$egpu_toggle" = "off" -o "$egpu_toggle" = "" ]
-                        if cat /etc/X11/xorg.conf.d/20-intel.conf|grep -q "^#"
-                            sudo egpu off
-                        end
-                        break
-                    end
-                end
+                #while true
+                #    read egpu_toggle -P "Set eGPU primary or off(default)? "
+                #    if [ "$egpu_toggle" = "primary" ]
+                #        if lsmod|grep -q nouveau
+                #            echo "Please reboot. The nouveau module cannot be removed."
+                #            exit 1
+                #        end
+                #        if cat /etc/X11/xorg.conf.d/20-intel.conf|grep -qv "^#"
+                #            # a script I wrote to enable/disable my eGPU. it should be updated.
+                #            sudo egpu primary
+                #        end
+                #        break
+                #    else if [ "$egpu_toggle" = "off" -o "$egpu_toggle" = "" ]
+                #        if cat /etc/X11/xorg.conf.d/20-intel.conf|grep -q "^#"
+                #            sudo egpu off
+                #        end
+                #        break
+                #    end
+                #end
                 $HOME/.bin/gui xfce
             else
                 if lsmod|grep -q nvidia
@@ -131,6 +131,7 @@ alias run_less="./run 2>&1|less -r"
 alias test_less="./test 2>&1|less -r"
 # Save me SO MUCH trouble
 alias rm=trash
+alias kill_job="kill (jobs -p %1)"
 
 
 function school
