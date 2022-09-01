@@ -14,4 +14,5 @@ return require("packer").startup(function(use)
     use "Clinery1/nebulous.nvim"
     use "terrortylor/nvim-comment"
     use "lewis6991/spellsitter.nvim"
+    use "kylechui/nvim-surround"
 end)

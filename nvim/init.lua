@@ -153,6 +153,10 @@ require("nebulous").setup {
     },
 }
 
+-- nvim-surround
+local nvim_surround=require("nvim-surround")
+nvim_surround.setup()
+
 
 -- misc
 vim.cmd("hi SpellCap ctermbg=17 gui=undercurl guisp=Blue")
