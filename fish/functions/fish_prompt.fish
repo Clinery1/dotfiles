@@ -1,5 +1,5 @@
 function preexec --on-event fish_preexec
-    $HOME/projects/fish_prompt/target/release/fish_prompt $COLUMNS $LINES --preexec $argv[1]
+    $HOME/projects/fish_prompt/target/release/fish_prompt --preexec $argv[1]
 end
 function prompt --on-event fish_prompt
     #Save the return status of the previous command
@@ -10,8 +10,8 @@ function prompt --on-event fish_prompt
             echo -n " "
         end
     )
-    $HOME/projects/fish_prompt/target/release/fish_prompt $COLUMNS $LINES --prompt "$PIPE_STATUS"
+    $HOME/projects/fish_prompt/target/release/fish_prompt --prompt "$PIPE_STATUS"
 end
 function fish_prompt --description 'Informative prompt'
-    $HOME/projects/fish_prompt/target/release/fish_prompt $COLUMNS $LINES   # do the single-line prompt
+    $HOME/projects/fish_prompt/target/release/fish_prompt   # do the single-line prompt
 end
