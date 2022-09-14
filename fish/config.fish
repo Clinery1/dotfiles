@@ -241,7 +241,7 @@ function wifi
 end
 set WIFI_COMMANDS "scan connect disconnect status"
 complete -c wifi -f
-complete -c wifi -n "not __fish_seen_subcommand_from $WIFI_COMMANDS" -a "scan connect disconnect status"
+complete -c wifi -n "not __fish_seen_subcommand_from $WIFI_COMMANDS" -a "$WIFI_COMMANDS"
 function png2pdf
     if [ (count $argv) = "0" ]
         echo "Please provide a file name and PNG filename(s) to convert"
@@ -256,6 +256,24 @@ function png2pdf
         set CONTENTS (echo "$CONTENTS![]($file)")
     end
     echo "$CONTENTS"|pandoc -o $argv[1]
+end
+function screenshot
+    if argparse 'f/fullscreen' -- $argv
+        set SLURP_ARGS ""
+        if [ ! "$_flag_f" = "" ]
+            set SLURP_ARGS "-o"
+        end
+        set SLURP_OUT (slurp $SLURP_ARGS)
+        if [ "$pipestatus" = "0" ]
+            if [ "$argv[1]" = "" ]
+                grim -g "$SLURP_OUT" screenshot.png
+            else
+                grim -g "$SLURP_OUT" "$argv[1]"
+            end
+        else
+            return 1
+        end
+    end
 end
 
 
