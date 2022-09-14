@@ -60,14 +60,14 @@ parser_config.docbuilder={
     },
     filetype="docbuild",
 }
-parser_config.fanasm={
+parser_config.sexpression={
     install_info={
-        url="~/projects/languages/vm_langs/tree-sitter-fanasm",
+        url="~/projects/languages/tree-sitter-sexpression",
         files={"src/parser.c","src/scanner.c"},
         generate_requires_npm=false,
         requires_generate_from_grammar=false,
     },
-    filetype="fanasm",
+    filetype="sexpression",
 }
 local treesitter_queries=require("vim.treesitter.query")
 
