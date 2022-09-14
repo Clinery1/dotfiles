@@ -1,3 +1,7 @@
+# include the default sway configs
+include /etc/sway/config.d/*
+
+
 # Variables
 ## Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -178,8 +182,8 @@ output DVI-D-1 pos 1920 0 res 1920x1080
 output DP-6 pos 0 0 res 1920x1080
 # disabled
 output eDP-1 pos 3840 0 res 2256x1504
-output DP-1 pos 1920 0 res 1920x1080
-output DP-3 pos 0 0 res 1920x1080
+output "Samsung Electric Company C24F390 HTQJ904738" pos 1920 0 res 1920x1080
+output "Unknown N1F PRO FN1FA1W021266" pos 0 0 res 1920x1080
 
-# include the default sway configs
-include /etc/sway/config.d/*
+# Map the portable monitor's touchscreen to its location
+input "8746:1:ILITEK_ILITEK-TP" map_to_region 0 0 1920 1080
