@@ -1,6 +1,6 @@
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.asm  set ft=nasm")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.s  set ft=asm")
-vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.idea  set ft=markdown")
+vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.idea  set ft=markdown wrap linebreak textwidth=120 spell")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.toml  set ft=cfg")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.fish  set ft=fish")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.glsl  set ft=glsl")

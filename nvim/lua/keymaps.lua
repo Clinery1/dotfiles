@@ -1,10 +1,8 @@
 -- Maps for insert mode
 vim.cmd("imap <C-Q> <ESC>:quitall!<CR>")
 vim.cmd("imap <S-TAB> <ESC><<i")
-vim.cmd("imap <F3> <ESC>:call LanguageClient#explainErrorAtPoint()<CR>a")
 vim.cmd("imap <F4> •")
 vim.cmd("imap <C-^> <ESC>^i")
-vim.cmd("imap <C-r> <ESC>:call LanguageClient#explainErrorAtPoint()<CR>a")
 vim.cmd("imap <C-s> <ESC>:w<CR>a")
 vim.cmd("imap <C-t> <ESC>:tabedit<CR>")
 vim.cmd("imap <C-Down> <ESC><C-w><Down>i")
@@ -41,6 +39,7 @@ vim.cmd("map ff :foldclose<CR>")
 vim.cmd("map F :foldopen<CR>")
 vim.cmd("map B :buffers<CR>")
 vim.cmd("map b :buffer")
+vim.cmd("map c<Space> :%s/^  /    /g<CR>:noh<CR>")
 
 
 -- Maps for visual mode
