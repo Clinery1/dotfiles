@@ -163,15 +163,18 @@ input type:touchpad {
     scroll_method two_finger
 }
 
-# Fusuma gestures
-exec /home/clinery/.local/share/gem/ruby/3.0.0/bin/fusuma
+# Fusuma gestures (disabled due to removing myself from the `input` group). May be reenabled later when I use the touchpad more.
+# exec /home/clinery/.local/share/gem/ruby/3.0.0/bin/fusuma
 
 # Laptop screen scale
 output eDP-1 scale 1
 output DVI-D-1 scale 1
-output DP-6 scale 1
+output DP-1 scale 1
 output DP-2 scale 1
 output DP-3 scale 1
+output DP-4 scale 1
+output DP-5 scale 1
+output DP-6 scale 1
 
 # Display config
 # Since we disable the laptop screen when the eGPU is plugged in, we don't have to worry about
@@ -184,6 +187,14 @@ output DP-6 pos 0 0 res 1920x1080
 output eDP-1 pos 3840 0 res 2256x1504
 output "Samsung Electric Company C24F390 HTQJ904738" pos 1920 0 res 1920x1080
 output "Unknown N1F PRO FN1FA1W021266" pos 0 0 res 1920x1080
+
+# just portable monitor and laptop
+# output eDP-1 pos 1920 0 res 2256x1504
+# output "Unknown N1F PRO FN1FA1W021266" pos 0 0 res 1920x1080
+
+# old basement TV settings
+# output eDP-1 pos 720 0 res 2256x1504
+# output "Samsung Electric Company SAMSUNG PDP 0x00000000" pos 0 0 res 720x480
 
 # Map the portable monitor's touchscreen to its location
 input "8746:1:ILITEK_ILITEK-TP" map_to_region 0 0 1920 1080
