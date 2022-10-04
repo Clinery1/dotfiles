@@ -39,7 +39,10 @@ vim.cmd("map ff :foldclose<CR>")
 vim.cmd("map F :foldopen<CR>")
 vim.cmd("map B :buffers<CR>")
 vim.cmd("map b :buffer")
-vim.cmd("map c<Space> :%s/^  /    /g<CR>:noh<CR>")
+-- Double the size of the indent, so make 2 spaces 4
+vim.cmd("map c<Space> :%s/^\\( *\\)/\\1\\1/g<CR>:noh<CR>")
+-- Half the size of the indent, so make 4 spaces 2 (really cool regex right here)
+vim.cmd("map C<Space> :%s/^\\( *\\)\\1/\\1/g<CR>:noh<CR>")
 
 
 -- Maps for visual mode
