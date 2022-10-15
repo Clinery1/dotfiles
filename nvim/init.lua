@@ -78,7 +78,7 @@ spellsitter.setup()
 -- LSP configs
 local lspconfig=require("lspconfig")
 -- lspconfig.denols.setup{}
-lspconfig.rls.setup{}
+lspconfig.rust_analyzer.setup{}
 lspconfig.svls.setup{}
 
 -- nvim-comment
