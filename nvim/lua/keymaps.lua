@@ -5,10 +5,10 @@ vim.cmd("imap <F4> •")
 vim.cmd("imap <C-^> <ESC>^i")
 vim.cmd("imap <C-s> <ESC>:w<CR>a")
 vim.cmd("imap <C-t> <ESC>:tabedit<CR>")
-vim.cmd("imap <C-Down> <ESC><C-w><Down>i")
-vim.cmd("imap <C-Up> <ESC><C-w><Up>i")
-vim.cmd("imap <C-Right> <ESC><C-w><Right>i")
-vim.cmd("imap <C-Left> <ESC><C-w><Left>i")
+vim.cmd("imap <C-Down> <ESC><C-w><Down>a")
+vim.cmd("imap <C-Up> <ESC><C-w><Up>a")
+vim.cmd("imap <C-Right> <ESC><C-w><Right>a")
+vim.cmd("imap <C-Left> <ESC><C-w><Left>a")
 vim.cmd("imap  <ESC>:CommentToggle<CR>a")    -- <C-/>, but that can't be bound for some reason
 
 
