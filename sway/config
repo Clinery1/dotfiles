@@ -17,6 +17,7 @@ bindsym $mod+F1 exec $term
 
 ## Kill focused window
 bindsym $mod+F4 kill
+bindsym $mod+q kill
 
 ## Start your launcher
 bindsym $mod+Escape exec $menu
@@ -185,8 +186,8 @@ output DVI-D-1 pos 1920 0 res 1920x1080
 # center
 output DP-6 pos 0 0 res 1920x1080
 # disabled
-output eDP-1 pos 3840 0 res 2256x1504
-output "Samsung Electric Company C24F390 HTQJ904738" pos 1920 0 res 1920x1080
+output eDP-1 pos 4000 0 res 2256x1504
+output "Samsung Electric Company C24F390 HTQJ904738" pos 2000 0 res 1920x1080
 output "Unknown N1F PRO FN1FA1W021266" pos 0 0 res 1920x1080
 
 # just portable monitor and laptop
