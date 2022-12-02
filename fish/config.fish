@@ -126,9 +126,9 @@ alias init_c="echo -e \"#include <stdio.h>\n\n\nint main() {\n    return 0;\n}\"
 alias init_cpp="echo -e \"#include <iostream>\n\n\nusing std::cout;\nusing std::endl;\nusing std::cin;\n\n\nint main() {\n    return 0;\n}\""
 alias butler="$HOME/.config/itch/apps/butler/butler"
 alias bat="bat --paging=never"
-alias build_less="./build 2>&1|less -r"
-alias run_less="./run 2>&1|less -r"
-alias test_less="./test 2>&1|less -r"
+alias build_less="./build 2>&1|less"
+alias run_less="./run 2>&1|less"
+alias test_less="./test 2>&1|less"
 # Save me SO MUCH trouble
 alias rm=trash
 alias kill_job="kill (jobs -p %1)"
