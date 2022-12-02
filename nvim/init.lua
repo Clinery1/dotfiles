@@ -77,7 +77,7 @@ spellsitter.setup()
 
 -- LSP configs
 local lspconfig=require("lspconfig")
--- lspconfig.denols.setup{}
+lspconfig.denols.setup{}
 lspconfig.rust_analyzer.setup{}
 lspconfig.svls.setup{}
 
