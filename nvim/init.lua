@@ -28,6 +28,22 @@ opt.signcolumn="auto:2"
 
 
 -- plugin config things
+-- indent-blankline
+require("indent_blankline").setup {
+    char = "┊",
+    show_current_context = false,
+    show_current_context_start = false,
+    char_highlight_list = {
+        "rainbowcol1",
+        "rainbowcol2",
+        "rainbowcol3",
+        "rainbowcol4",
+        "rainbowcol5",
+        "rainbowcol6",
+        "rainbowcol7",
+    },
+}
+
 -- treesitter
 require"nvim-treesitter.configs".setup {
     highlight={

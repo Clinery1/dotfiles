@@ -14,7 +14,7 @@ vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.gd  set ft=gdscript noex
 vim.cmd("autocmd BufRead,BufNewFile,BufEnter *.rom set binary ft=xxd")
 vim.cmd("autocmd BufNewFile,BufEnter *.lalrpop set ft=lalrpop")
 -- fix the wrapping problem that appeared with treesitter-markdown
-vim.cmd("autocmd BufNewFile,BufEnter *.md set wrap")
+vim.cmd("autocmd BufNewFile,BufEnter *.md set wrap linebreak")
 
 -- autocommands to set the filetype of my created languages
 vim.cmd("autocmd BufNewFile,BufEnter *.cppl set ft=cppl")

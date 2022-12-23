@@ -15,4 +15,5 @@ return require("packer").startup(function(use)
     use "terrortylor/nvim-comment"
     use "lewis6991/spellsitter.nvim"
     use "kylechui/nvim-surround"
+    use "lukas-reineke/indent-blankline.nvim"
 end)
