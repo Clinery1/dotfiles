@@ -11,6 +11,7 @@ set $lock swaylock -c 000000
 
 # Wallpaper
 output * bg $HOME/Desktop/Background/background.png fill
+
 # Key bindings
 ## Start a terminal
 bindsym $mod+F1 exec $term
@@ -24,6 +25,37 @@ bindsym $mod+q kill
 
 ## Start your launcher
 bindsym $mod+Escape exec $menu
+
+## Gestures
+### Move windows up/down/left/right
+bindgesture swipe:3:up move up
+bindgesture swipe:3:down move down
+bindgesture swipe:3:left move left
+bindgesture swipe:3:right move right
+
+### Move focus up/down/left/right
+bindgesture swipe:4:up focus up
+bindgesture swipe:4:down focus down
+bindgesture swipe:4:left focus left
+bindgesture swipe:4:right focus right
+
+### Move window to next/prev workspace and focus
+bindgesture pinch:2:inward+right move workspace next, workspace next
+bindgesture pinch:2:outward+left move workspace prev, workspace prev
+
+## Switch workspaces
+bindsym $mod+Shift+1 workspace 1
+bindsym $mod+Shift+2 workspace 2
+bindsym $mod+Shift+3 workspace 3
+bindsym $mod+Shift+4 workspace 4
+bindsym $mod+Shift+5 workspace 5
+
+## Move to workspace
+bindsym $mod+Ctrl+1 move workspace 1, workspace 1
+bindsym $mod+Ctrl+2 move workspace 2, workspace 2
+bindsym $mod+Ctrl+3 move workspace 3, workspace 3
+bindsym $mod+Ctrl+4 move workspace 4, workspace 4
+bindsym $mod+Ctrl+5 move workspace 5, workspace 5
 
 ## Drag floating windows by holding down $mod and left mouse button.
 ## Resize them with right mouse button + $mod.
@@ -83,7 +115,9 @@ bindsym $mod+minus scratchpad show
 
 # Cycle through workspaces (each monitor has its own workspace)
 bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
+
+# Move the current window to the next workspace
+bindsym $mod+Shift+Tab move container to workspace next, workspace next
 
 # Media keys
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +0.5db
