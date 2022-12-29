@@ -40,8 +40,8 @@ bindgesture swipe:4:left focus left
 bindgesture swipe:4:right focus right
 
 ### Move window to next/prev workspace and focus
-bindgesture pinch:2:inward+right move workspace next, workspace next
-bindgesture pinch:2:outward+left move workspace prev, workspace prev
+bindgesture pinch:3:counterclockwise workspace next
+bindgesture pinch:3:clockwise workspace prev
 
 ## Switch workspaces
 bindsym $mod+Shift+1 workspace 1
@@ -51,11 +51,11 @@ bindsym $mod+Shift+4 workspace 4
 bindsym $mod+Shift+5 workspace 5
 
 ## Move to workspace
-bindsym $mod+Ctrl+1 move workspace 1, workspace 1
-bindsym $mod+Ctrl+2 move workspace 2, workspace 2
-bindsym $mod+Ctrl+3 move workspace 3, workspace 3
-bindsym $mod+Ctrl+4 move workspace 4, workspace 4
-bindsym $mod+Ctrl+5 move workspace 5, workspace 5
+bindsym $mod+Alt+1 move workspace 1, workspace 1
+bindsym $mod+Alt+2 move workspace 2, workspace 2
+bindsym $mod+Alt+3 move workspace 3, workspace 3
+bindsym $mod+Alt+4 move workspace 4, workspace 4
+bindsym $mod+Alt+5 move workspace 5, workspace 5
 
 ## Drag floating windows by holding down $mod and left mouse button.
 ## Resize them with right mouse button + $mod.
@@ -203,6 +203,9 @@ input "1133:49987:Logitech_G915_TKL_LIGHTSPEED_Wireless_RGB_Mechanical_Gaming_Ke
 
 # Speed up touchpad
 input "2362:628:PIXA3854:00_093A:0274_Touchpad" pointer_accel 0.6 scroll_factor 1.5
+
+# Speed up external touchpad
+input "1165:35089:HTX_USB_HID_Device_HTX_HID_Device_Touchpad" pointer_accel 0.6 scroll_factor 1.5
 
 # Make the touchpad usable
 input type:touchpad {
