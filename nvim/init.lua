@@ -25,6 +25,9 @@ opt.mouse="a"
 -- hidden till there are things to show, but not
 -- more than 2 things at a time
 opt.signcolumn="auto:2"
+-- treesitter folds
+opt.foldmethod="expr"
+opt.foldexpr="nvim_treesitter#foldexpr()"
 
 
 -- plugin config things

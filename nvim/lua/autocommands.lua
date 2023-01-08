@@ -5,6 +5,9 @@ vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.toml  set ft=cfg")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.fish  set ft=fish")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.glsl  set ft=glsl")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.gd  set ft=gdscript noexpandtab")
+
+-- unfold all folds on file open
+vim.cmd("au BufRead,BufWinEnter * normal zR")
 -- run a C file
 -- vim.cmd("autocmd BufEnter,BufRead *.c map <A-r> :execute 'let file=\"' expand('%:t') '\"'<CR>:w<CR>:tabedit<CR>:execute \"terminal ~/.bin/run_c_file --quiet \" file<CR>i")
 -- run a C++ file
