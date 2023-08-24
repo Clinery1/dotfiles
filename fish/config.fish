@@ -1,70 +1,26 @@
 # vim: ft=fish
 function fish_greeting
-    if [ "$TERM" = "linux" ]
-        while true
-            read gui_toggle -P "GUI? [Y/n] "
-            if [ "$gui_toggle" = "y" -o "$gui_toggle" = "Y" -o "$gui_toggle" = "yes" -o "$gui_toggle" = "YES" -o "$gui_toggle" = "" ]
-                set gui_toggle "true"
-                break
-            else
-                set gui_toggle "false"
-                break
-            end
-        end
-        if $gui_toggle
-            while true
-                read xfce -P "Sway(default) or xfce? "
-                if [ "$xfce" = "xfce" -o "$xfce" = "XFCE" ]
-                    set XFCE "true"
-                    break
-                else if [ "$xfce" = "" -o "$xfce" = "sway" ]
-                    set XFCE "false"
-                    break
-                end
-            end
-            if $XFCE
-                #while true
-                #    read egpu_toggle -P "Set eGPU primary or off(default)? "
-                #    if [ "$egpu_toggle" = "primary" ]
-                #        if lsmod|grep -q nouveau
-                #            echo "Please reboot. The nouveau module cannot be removed."
-                #            exit 1
-                #        end
-                #        if cat /etc/X11/xorg.conf.d/20-intel.conf|grep -qv "^#"
-                #            # a script I wrote to enable/disable my eGPU. it should be updated.
-                #            sudo egpu primary
-                #        end
-                #        break
-                #    else if [ "$egpu_toggle" = "off" -o "$egpu_toggle" = "" ]
-                #        if cat /etc/X11/xorg.conf.d/20-intel.conf|grep -q "^#"
-                #            sudo egpu off
-                #        end
-                #        break
-                #    end
-                #end
-                $HOME/.bin/gui xfce
-            else
-                if lsmod|grep -q nvidia
-                    echo "Removing NVIDIA drivers"
-                    sudo rmmod nvidia_drm
-                    sleep 0.5
-                    sudo rmmod nvidia_modeset
-                    sleep 0.5
-                    sudo rmmod nvidia_uvm
-                    sleep 0.5
-                    sudo rmmod nvidia
-                    sleep 0.5
-                    if lsmod|grep -qv "nouveau"
-                        sleep 1
-                        echo "Inserting nouveau driver"
-                        sudo modprobe nouveau
-                        sleep 1
-                    end
-                end
-                $HOME/.bin/gui sway
-            end
-        end
-    else
+    # if [ "$TERM" = "linux" ]
+    #     read gui_toggle -P "GUI? [Y/n] "
+    #     if [ "$gui_toggle" = "y" -o "$gui_toggle" = "Y" -o "$gui_toggle" = "yes" -o "$gui_toggle" = "YES" -o "$gui_toggle" = "" ]
+    #         set gui_toggle "true"
+    #     else
+    #         set gui_toggle "false"
+    #     end
+    #     if $gui_toggle
+    #         read xfce -P "Sway(default) or xfce? "
+    #         if [ "$xfce" = "xfce" -o "$xfce" = "XFCE" ]
+    #             set XFCE "true"
+    #         else if [ "$xfce" = "" -o "$xfce" = "sway" ]
+    #             set XFCE "false"
+    #         end
+    #         if $XFCE
+    #             echo "Not currently supported"
+    #         else
+    #             gui sway
+    #         end
+    #     end
+    # else
         if [ "$CACHED" = "true" ]
             echo "Cached project `$CACHED_DIR`"
         else
@@ -73,7 +29,7 @@ function fish_greeting
             echo "Welcome, $NAME."
         end
         echo -e "│\n│"
-    end
+    # end
 end
 
 # Things
@@ -91,10 +47,13 @@ export TZ="America/New_York"
 export PICO_SDK_PATH="$HOME/github/pico-sdk"
 if lsmod|grep -q "nvidia"
     export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json"
+else if lsmod|grep -q "radeon"
+    export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.x86_64.json"
 else
     export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/intel_icd.x86_64.json"
 end
 export WIFI_INTERFACE="wlan0"
+export CARGO_NET_GIT_FETCH_WITH_CLI="true"
 
 # aliases
 alias calc="/bin/calc -d"
@@ -132,6 +91,7 @@ alias test_less="./test 2>&1|less"
 # Save me SO MUCH trouble
 alias rm=trash
 alias kill_job="kill (jobs -p %1)"
+alias todos="git grep -EI TODO"
 
 
 function school
@@ -278,10 +238,28 @@ end
 
 
 # ESP32 development stuff
-export PATH="$HOME/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/bin/:$HOME/.platformio/penv/bin/platformio:$PATH"
 function esp_source
+    export PATH="$HOME/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/bin/:$HOME/.platformio/penv/bin/platformio:$PATH"
     export LIBCLANG_PATH="$HOME/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-x86_64-unknown-linux-gnu/lib/"
     export PIP_USER=no
     export IDF_PATH="$HOME/github/esp-idf"
     source $HOME/github/esp-idf/export.fish
+end
+
+function synth.fish
+    if [ "$argv[1]" = "build" ]
+        yowasp-yosys -D LEDS_NR=8 -p "read_verilog -sv src/main.sv; synth_gowin -json target/main.json" &&
+            yowasp-nextpnr-gowin --json target/main.json \
+                --write target/pnrmain.json \
+                --device "GW1NR-LV9QN88PC6/I5" \
+                --family GW1N-9C \
+                --cst src/main.cst &&
+            gowin_pack  -d GW1N-9C -o target/pack.fs target/pnrmain.json
+    else if [ "$argv[1]" = "upload" ]
+        openFPGALoader -b tangnano target/pack.fs
+    else
+        echo "Subcommands:"
+        echo "  build"
+        echo "  run"
+    end
 end
