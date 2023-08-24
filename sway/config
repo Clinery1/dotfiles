@@ -28,20 +28,20 @@ bindsym $mod+Escape exec $menu
 
 ## Gestures
 ### Move windows up/down/left/right
-bindgesture swipe:3:up move up
-bindgesture swipe:3:down move down
-bindgesture swipe:3:left move left
-bindgesture swipe:3:right move right
+# bindgesture swipe:3:up move up
+# bindgesture swipe:3:down move down
+# bindgesture swipe:3:left move left
+# bindgesture swipe:3:right move right
 
 ### Move focus up/down/left/right
-bindgesture swipe:4:up focus up
-bindgesture swipe:4:down focus down
-bindgesture swipe:4:left focus left
-bindgesture swipe:4:right focus right
+# bindgesture swipe:4:up focus up
+# bindgesture swipe:4:down focus down
+# bindgesture swipe:4:left focus left
+# bindgesture swipe:4:right focus right
 
 ### Move window to next/prev workspace and focus
-bindgesture pinch:3:counterclockwise workspace next
-bindgesture pinch:3:clockwise workspace prev
+# bindgesture pinch:3:counterclockwise workspace next
+# bindgesture pinch:3:clockwise workspace prev
 
 ## Switch workspaces
 bindsym $mod+Shift+1 workspace 1
@@ -155,29 +155,30 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-
-# Hiding items
-mode "hide" {
-    # Move your focus around
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-
-    # Hide items
-    bindsym Space move scratchpad
+mode "move" {
+    bindsym Ctrl+Tab move right
+    bindsym Ctrl+Shift+Tab move left
 
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+m mode "default"
+    bindsym $mod+Shift+m mode "default"
 }
-bindsym $mod+h mode "hide"
+bindsym $mod+Shift+m mode "move"
+
+mode "move focus" {
+    bindsym Ctrl+Tab focus right
+    bindsym Ctrl+Shift+Tab focus left
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+m mode "default"
+    bindsym $mod+Shift+m mode "default"
+}
+bindsym $mod+m mode "move focus"
+
 
 #
 # Status Bar:
@@ -221,32 +222,32 @@ input type:touchpad {
 # output eDP-1 scale 1
 output eDP-1 scale 2
 output DVI-D-1 scale 1
+output HDMI-A-1 scale 1
 output DP-1 scale 1
 output DP-2 scale 1
 output DP-3 scale 1
 output DP-4 scale 1
 output DP-5 scale 1
 output DP-6 scale 1
+output DP-7 scale 1
 
-# Display config
-# Since we disable the laptop screen when the eGPU is plugged in, we don't have to worry about
-# the laptop screen overlaying the other screens
-# left of the center
-output DVI-D-1 pos 1920 0 res 1920x1080
-# center
-output DP-6 pos 0 0 res 1920x1080
-# disabled
-output eDP-1 pos 4000 0 res 2256x1504
-output "Samsung Electric Company C24F390 HTQJ904738" pos 2000 0 res 1920x1080
-output "Unknown N1F PRO FN1FA1W021266" pos 0 0 res 1920x1080
+# Display config (home desk)
+## Left -> Right
+workspace 1 output DP-7
+workspace 2 output DP-5
+workspace 3 output DP-6
+
+# All RX 6700 eGPU
+output DP-7 pos 0 0 res 1920x1080
+output DP-5 pos 2200 0 res 1920x1080
+output DP-6 pos 4400 0 res 1920x1080
 
 # just portable monitor and laptop
 # output eDP-1 pos 1920 0 res 2256x1504
 # output "Unknown N1F PRO FN1FA1W021266" pos 0 0 res 1920x1080
 
-# old basement TV settings
-# output eDP-1 pos 720 0 res 2256x1504
-# output "Samsung Electric Company SAMSUNG PDP 0x00000000" pos 0 0 res 720x480
-
 # Map the portable monitor's touchscreen to its location
 input "8746:1:ILITEK_ILITEK-TP" map_to_region 0 0 1920 1080
+
+
+output * adaptive_sync off
