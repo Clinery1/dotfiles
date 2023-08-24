@@ -42,7 +42,26 @@ vim.cmd("map b :buffer")
 vim.cmd("map c<Space> :%s/^\\( *\\)/\\1\\1/g<CR>:noh<CR>")
 -- Half the size of the indent, so make 4 spaces 2 (really cool regex right here)
 vim.cmd("map C<Space> :%s/^\\( *\\)\\1/\\1/g<CR>:noh<CR>")
+-- execute :noh
+vim.cmd("map nh :noh<CR>")
+-- remap h/j/k/l to make more sense to me
+vim.cmd("map h <Left>")
+vim.cmd("map j <Right>")
+vim.cmd("map l <Up>")
+vim.cmd("map k <Down>")
 
 
 -- Maps for visual mode
 vim.cmd("vmap  :CommentToggle<CR>")
+
+
+-- Diagnostic maps
+local opts = {
+    noremap=true,
+    silent=true,
+}
+vim.keymap.set('n', '<F2>', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<F3>', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<F4>', vim.diagnostic.show, opts)
+vim.keymap.set('n', '<M-Left>', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', '<M-Right>', vim.diagnostic.goto_next, opts)
