@@ -8,11 +8,16 @@
 @define-color temp-crit #eb4d4b;
 @define-color trashcount #724bc5;
 @define-color clock #64727D;
-@define-color sway-window #3fafbf;
+@define-color sway-workspaces #3fafbf;
 @define-color sway-mode #64727D;
 * {
-    font-family: "mononoki Nerd Font Mono", monospace;
+    font-family: "Mononoki Nerd Font Mono", monospace;
     font-size: 12px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: 0 0;
 }
 window#waybar {
     background-color: rgba(0,0,0,0.0);
@@ -33,9 +38,25 @@ window#waybar.hidden {
 #pulseaudio,
 #custom-trashcount,
 #window,
-#mode {
-    padding: 0 5px;
+#mode,
+#workspaces button {
     color: #ffffff;
+}
+#workspaces button {
+    color: #ddd;
+    border: none;
+    text-shadow: none;
+    background-color: @sway-workspaces;
+    border-radius: 0;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+#workspaces button.focused {
+    color: #fff;
+}
+#workspaces button:hover {
+    color: @sway-workspaces;
+    background: #444;
 }
 #clock {
     background-color: @clock;
@@ -58,10 +79,6 @@ window#waybar.hidden {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-}
-#window {
-    background-color: @sway-window;
-    color: #000000;
 }
 #mode {
     background-color: @sway-mode;
@@ -92,57 +109,90 @@ window#waybar.hidden {
     background-color: @trashcount;
 }
 #custom-arrow0 {
-    font-size: 16px;
+    font-size: 18px;
     color: @trashcount;
     background: transparent;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow1 {
-    font-size: 16px;
+    font-size: 18px;
     color: @network;
     background: @trashcount;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow2 {
-    font-size: 16px;
+    font-size: 18px;
     color: @cpu;
     background: @network;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow3 {
-    font-size: 16px;
+    font-size: 18px;
     color: @disk;
     background: @cpu;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow4 {
-    font-size: 16px;
+    font-size: 18px;
     color: @memory;
     background: @disk;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow5 {
-    font-size: 16px;
+    font-size: 18px;
     color: @temp;
     background: @memory;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow6 {
-    font-size: 16px;
+    font-size: 18px;
     color: @battery;
     background: @temp;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow7 {
-    font-size: 16px;
+    font-size: 18px;
     color: @pulseaudio;
     background: @battery;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow8 {
-    font-size: 16px;
+    font-size: 18px;
     color: @clock;
     background: @pulseaudio;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow9 {
-    font-size: 16px;
-    color: @sway-window;
+    font-size: 18px;
+    color: @sway-workspaces;
     background: transparent;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }
 #custom-arrow10 {
-    font-size: 16px;
+    font-size: 18px;
     color: @sway-mode;
-    background: @sway-window;
+    background: @sway-workspaces;
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }

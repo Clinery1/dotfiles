@@ -4,10 +4,11 @@
     "position": "top",
     "height": 20,
     "spacing": 0,
+    "margin": 0,
     "modules-left": [
         "sway/mode",
         "custom/arrow10",
-        "sway/window",
+        "sway/workspaces",
         "custom/arrow9"
     ],
     "modules-center": [],
@@ -54,14 +55,13 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "sway/window": {
-        "rewrite": {
-           "(.*) - Vivaldi": "爵 $1",
-           "v (.*)": " [$1]",
-           "fish (.*)": " [$1]",
-           "ranger (.*)": " [$1]"
-        },
-        "tooltip": false
+    "sway/workspaces": {
+        "format": "{icon} {value}",
+        "format-icons": {
+            "urgent": "󰗖",
+            "focused": "",
+            "default": ""
+        }
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -73,12 +73,50 @@
         "interval": 5
     },
     "disk#root": {
-        "format": " {used}/{total};{percentage_used}%",
+        "format-zero":  "  {free}",
+        "format-one":   " 󰪞 {free}",
+        "format-two":   " 󰪟 {free}",
+        "format-three": " 󰪠 {free}",
+        "format-four":  " 󰪡 {free}",
+        "format-five":  " 󰪢 {free}",
+        "format-six":   " 󰪣 {free}",
+        "format-seven": " 󰪤 {free}",
+        "format-eight": " 󰪥 {free}",
+        "states": { 
+            "zero":  0,
+            "one":   12.5,
+            "two":   25,
+            "three": 37.5,
+            "four":  50,
+            "five":  62.5,
+            "six":   75,
+            "seven": 87.5,
+            "eight": 100
+        },
         "path": "/"
     },
     "disk#home": {
-        "format": "  {used}/{total};{percentage_used}%",
-        "path": "/home"
+        "format-zero":  "   {free}",
+        "format-one":   "  󰪞 {free}",
+        "format-two":   "  󰪟 {free}",
+        "format-three": "  󰪠 {free}",
+        "format-four":  "  󰪡 {free}",
+        "format-five":  "  󰪢 {free}",
+        "format-six":   "  󰪣 {free}",
+        "format-seven": "  󰪤 {free}",
+        "format-eight": "  󰪥 {free}",
+        "states": { 
+            "zero":  0,
+            "one":   12.5,
+            "two":   25,
+            "three": 37.5,
+            "four":  50,
+            "five":  62.5,
+            "six":   75,
+            "seven": 87.5,
+            "eight": 100
+        },
+        "path": "/home",
     },
     "memory": {
         "format": " {percentage}% | 易 {swapPercentage}%",
