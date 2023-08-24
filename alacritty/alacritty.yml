@@ -1,15 +1,15 @@
 # font: mononoki Nerd Font Mono
 font:
   normal:
-    family: "mononoki Nerd Font Mono"
+    family: "Mononoki Nerd Font Mono"
   bold:
-    family: "mononoki Nerd Font Mono"
+    family: "Mononoki Nerd Font Mono"
     style: Bold
   italic:
-    family: "mononoki Nerd Font Mono"
+    family: "Mononoki Nerd Font Mono"
     style: Italic
   bold_italic:
-    family: "mononoki Nerd Font Mono"
+    family: "Mononoki Nerd Font Mono"
     style: BoldItalic
   size: 13
 colors:
