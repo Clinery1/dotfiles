@@ -1,67 +1,95 @@
 -- Maps for insert mode
-vim.cmd("imap <C-Q> <ESC>:quitall!<CR>")
-vim.cmd("imap <S-TAB> <ESC><<i")
-vim.cmd("imap <F4> •")
-vim.cmd("imap <C-^> <ESC>^i")
-vim.cmd("imap <C-s> <ESC>:w<CR>a")
-vim.cmd("imap <C-t> <ESC>:tabedit<CR>")
-vim.cmd("imap <C-Down> <ESC><C-w><Down>a")
-vim.cmd("imap <C-Up> <ESC><C-w><Up>a")
-vim.cmd("imap <C-Right> <ESC><C-w><Right>a")
-vim.cmd("imap <C-Left> <ESC><C-w><Left>a")
-vim.cmd("imap  <ESC>:CommentToggle<CR>a")    -- <C-/>, but that can't be bound for some reason
+local insert_maps = {
+    {"<C-Q>", "<ESC>:quitall!<CR>"},
+    {"<S-Tab>", "<ESC><<i"},
+    {"<F4>", "•"},
+    {"<C-^>", "<ESC>^i"},
+    {"<C-s>", "<ESC>:w<CR>a"},
+    {"<C-t>", "<ESC>:tabedit<CR>"},
+    {"<C-Down>", "<ESC><C-w><Down>a"},
+    {"<C-Up>", "<ESC><C-w><Up>a"},
+    {"<C-Right>", "<ESC><C-w><Right>a"},
+    {"<C-Left>", "<ESC><C-w><Left>a"},
+    {"<C-/>", "<ESC>:CommentToggle<CR>a"},
+}
+for i, binding in ipairs(insert_maps) do
+    vim.keymap.set("i", binding[1], binding[2], binding[3])
+end
 
 
 -- Maps for normal mode
-vim.cmd("map <C-/> ^i// ")
-vim.cmd("map ; :call SwitchNerdTree()<CR>")
-vim.cmd("map <C-n> :NERDTreeClose<CR>")
-vim.cmd("map <TAB> :tabnext<CR>")
-vim.cmd("map t :tabedit<CR>")
-vim.cmd("map <A-r> :w<CR>:tabedit<CR>:terminal fish -c run_less<CR>i")
-vim.cmd("map <A-b> :w<CR>:tabedit<CR>:terminal fish -c build_less<CR>i")
-vim.cmd("map <A-t> :w<CR>:tabedit<CR>:terminal fish -c test_less<CR>i")
-vim.cmd("map <C-Left> :vertical resize +1<CR>")
-vim.cmd("map <C-Right> :vertical resize -1<CR>")
-vim.cmd("map <C-Up> :resize -1<CR>")
-vim.cmd("map <C-Down> :resize +1<CR>")
-vim.cmd("map <S-Up> :set splitbelow<CR>:split<CR>")
-vim.cmd("map <S-Right> :set splitright<CR>:vsplit<CR>")
-vim.cmd("map <S-Down> :set splitbelow&<CR>:split<CR>")
-vim.cmd("map <S-Left> :set splitright&<CR>:vsplit<CR>")
-vim.cmd("map  :CommentToggle<CR>")    -- <C-/>, but that can't be bound for some reason
-vim.cmd("map q :q<CR>")
-vim.cmd("map Q :quitall!<CR>")
-vim.cmd("map w :w<CR>")
-vim.cmd("map <S-TAB> :tabNext<CR>")
-vim.cmd("map e :e ")
-vim.cmd("map F :normal za<CR>")
-vim.cmd("map B :buffers<CR>")
-vim.cmd("map b :buffer")
--- Double the size of the indent, so make 2 spaces 4
-vim.cmd("map c<Space> :%s/^\\( *\\)/\\1\\1/g<CR>:noh<CR>")
--- Half the size of the indent, so make 4 spaces 2 (really cool regex right here)
-vim.cmd("map C<Space> :%s/^\\( *\\)\\1/\\1/g<CR>:noh<CR>")
--- execute :noh
-vim.cmd("map nh :noh<CR>")
--- remap h/j/k/l to make more sense to me
-vim.cmd("map h <Left>")
-vim.cmd("map j <Right>")
-vim.cmd("map l <Up>")
-vim.cmd("map k <Down>")
+local normal_maps = {
+    {"rn", vim.lsp.buf.rename},
+    {"<C-/>", ":CommentToggle<CR>"},
+    {";", ":call SwitchNerdTree()<CR>"},
+    {"<C-n>", ":NERDTreeClose<CR>"},
+    {"<Tab>", ":tabnext<CR>"},
+    {"t", ":tabedit<CR>"},
+    {"<A-r>", ":w<CR>:tabedit<CR>:terminal fish -c run_less<CR>i"},
+    {"<A-b>", ":w<CR>:tabedit<CR>:terminal fish -c build_less<CR>i"},
+    {"<A-t>", ":w<CR>:tabedit<CR>:terminal fish -c test_less<CR>i"},
+    {"<C-Left>", ":vertical resize +1<CR>"},
+    {"<C-Right>", ":vertical resize -1<CR>"},
+    {"<C-Up>", ":resize -1<CR>"},
+    {"<C-Down>", ":resize +1<CR>"},
+    {"<S-Up>", ":set splitbelow<CR>:split<CR>"},
+    {"<S-Right>", ":set splitright<CR>:vsplit<CR>"},
+    {"<S-Down>", ":set splitbelow&<CR>:split<CR>"},
+    {"<S-Left>", ":set splitright&<CR>:vsplit<CR>"},
+    {"q", ":q<CR>"},
+    {"Q", ":quitall!<CR>"},
+    {"w", ":w<CR>"},
+    {"<S-Tab>", ":tabNext<CR>"},
+    {"e", ":e "},
+    {"F", ":normal za<CR>"},
+    {"B", ":buffers<CR>"},
+    {"b", ":buffer"},
+    -- Double the size of the indent, so make 2 spaces 4
+    {"c<Space>", ":%s/^\\( *\\)/\\1\\1/g<CR>:noh<CR>"},
+    -- Half the size of the indent, so make 4 spaces 2 (really cool regex right here)
+    {"C<Space>", ":%s/^\\( *\\)\\1/\\1/g<CR>:noh<CR>"},
+    -- execute :noh
+    {"nh", ":noh<CR>"},
+}
+for i, binding in ipairs(normal_maps) do
+    vim.keymap.set("n", binding[1], binding[2], binding[3])
+end
 
-
--- Maps for visual mode
-vim.cmd("vmap  :CommentToggle<CR>")
-
-
--- Diagnostic maps
-local opts = {
+-- Diagnostic opts
+local diagnostic_opts = {
     noremap=true,
     silent=true,
 }
-vim.keymap.set('n', '<F2>', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '<F3>', vim.diagnostic.setloclist, opts)
-vim.keymap.set('n', '<F4>', vim.diagnostic.show, opts)
-vim.keymap.set('n', '<M-Left>', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<M-Right>', vim.diagnostic.goto_next, opts)
+local diagnostic_maps = {
+    {"<F2>", vim.diagnostic.open_float, diagnostic_opts},
+    {"<F3>", vim.diagnostic.setloclist, diagnostic_opts},
+    {"<F4>", vim.diagnostic.show, diagnostic_opts},
+    {"<M-Left>", vim.diagnostic.goto_prev, diagnostic_opts},
+    {"<M-Right>", vim.diagnostic.goto_next, diagnostic_opts},
+}
+for i, binding in ipairs(diagnostic_opts) do
+    vim.keymap.set("n", binding[1], binding[2], binding[3])
+end
+
+-- copy and paste with the system clipboard
+local normal_visual_maps = {
+    {"p", '"+p'},
+    {"P", '"+P'},
+    {"Y", '"+Y'},
+    {"y", '"+y'},
+    {"d", '"+d'},
+    {"D", '"+D'},
+    {"x", '"+x'},
+}
+for i, binding in ipairs(normal_visual_maps) do
+    vim.keymap.set({"n", "v"}, binding[1], binding[2], binding[3])
+end
+
+
+-- Maps for visual mode
+local visual_maps = {
+    {"<C-/>", ":CommentToggle<CR>"},
+}
+for i, binding in ipairs(visual_maps) do
+    vim.keymap.set("v", binding[1], binding[2], binding[3])
+end

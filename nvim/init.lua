@@ -13,6 +13,10 @@ local keymap_opts = {
 
 
 opt.syntax="on"
+opt.showtabline = 0
+
+-- brightens the line the cursor is on
+opt.cursorline=true
 
 -- indent things
 opt.shiftwidth=4
@@ -22,12 +26,11 @@ opt.expandtab=true
 -- max width of the lines
 opt.textwidth=100
 
--- figure out what this does (has to be for a
--- reason)
+-- figure out what this does (has to be for a reason)
 opt.formatoptions.o=true
 --
 -- enable number column
-opt.number=true 
+opt.number=true
 
 -- disable wrap
 opt.wrap=false
@@ -50,22 +53,68 @@ opt.signcolumn="auto:2"
 opt.sidescrolloff=20
 
 
+-- neovide
+vim.o.guifont = "Mononoki Nerd Font Mono"
+vim.g.neovide_scale_factor = 0.8
+vim.g.neovide_scroll_animation_far_lines = 0
+vim.g.neovide_scroll_animation_length = 0
+vim.g.neovide_hide_mouse_when_typing = true
+vim.g.neovide_unlink_border_highlights = true
+vim.g.neovide_cursor_animation_length = 0.05
+
+
 -- plugin config things
--- indent-blankline
-require("indent_blankline").setup {
-    char = "┊",
-    show_current_context = false,
-    show_current_context_start = false,
-    char_highlight_list = {
-        "rainbowcol1",
-        "rainbowcol2",
-        "rainbowcol3",
-        "rainbowcol4",
-        "rainbowcol5",
-        "rainbowcol6",
-        "rainbowcol7",
+-- nebulous (color theme)
+require("nebulous").setup {
+    variant="night",
+    disable={
+        background=true,
+        endOfBuffer=false,
+        terminal_colors=false,
+    },
+    italic={
+        builtins=true,
+        comments=false,
+        keywords=true,
+        functions=false,
+        variables=false,
     },
 }
+
+
+-- indent-blankline
+require("ibl").setup {
+    -- show_current_context = false,
+    -- show_current_context_start = false,
+    indent = {
+        char = "┊",
+        highlight = {
+            "rainbowcol1",
+            "rainbowcol2",
+            "rainbowcol3",
+            "rainbowcol4",
+            "rainbowcol5",
+            "rainbowcol6",
+            "rainbowcol7",
+        },
+    },
+    scope = {
+        enabled = true,
+        show_start = true,
+        show_end = true,
+        highlight = {
+            "rainbowcol1",
+            "rainbowcol2",
+            "rainbowcol3",
+            "rainbowcol4",
+            "rainbowcol5",
+            "rainbowcol6",
+            "rainbowcol7",
+        },
+        char = "│",
+    },
+}
+
 
 -- rest.nvim
 local rest_nvim=require("rest-nvim")
@@ -97,11 +146,12 @@ rest_nvim.setup{
     },
     -- Jump to request line on run
     jump_to_request = false,
-    env_file = '.env',
+    env_file = ".env",
     custom_dynamic_variables = {},
     yank_dry_run = true,
 }
-vim.keymap.set('n', '<M-Space>', "<Plug>RestNvim", keymap_opts)
+vim.keymap.set("n", "<M-Space>", "<Plug>RestNvim", keymap_opts)
+
 
 -- treesitter
 require("nvim-treesitter.configs").setup {
@@ -146,18 +196,24 @@ parser_config.sexpression={
 }
 local treesitter_queries=require("vim.treesitter.query")
 
+
 -- spellsitter (treesitter-aware spell checking)
-local spellsitter=require("spellsitter")
-spellsitter.setup()
+-- local spellsitter=require("spellsitter")
+-- spellsitter.setup()
+
 
 -- LSP configs
+vim.diagnostic.config{
+    update_in_insert = false,
+};
 local lspconfig=require("lspconfig")
 -- lspconfig.denols.setup{}
-lspconfig.tsserver.setup{}
+-- lspconfig.tsserver.setup{}
 -- lspconfig.graphql.setup{}
 lspconfig.rust_analyzer.setup{}
 lspconfig.svls.setup{}
 -- lspconfig.hdl_checker.setup{}
+
 
 -- nvim-comment
 local commenter=require("nvim_comment").setup({
@@ -166,29 +222,61 @@ local commenter=require("nvim_comment").setup({
     create_mappings=false,
 })
 
--- airline theme stuff
-globals.airline_powerline_fonts=true
-globals.airline_mode_map={
-    ["__"]="-",
-    ["c"]="C",
-    ["i"]="I",
-    ["ic"]="I",
-    ["ix"]="I",
-    ["n"]="N",
-    ["ni"]="N",
-    ["no"]="N",
-    ["R"]="R",
-    ["Rv"]="R",
-    ["s"]="S",
-    ["S"]="S",
-    ["^S"]="S",
-    ["t"]="T",
-    ["v"]="V",
-    ["V"]="V",
-    ["^V"]="V",
+
+-- lualine theme stuff
+--- A simple funciton to create the `Tab N/N` text for the windowline
+local function lualine_tab_number()
+    local tab_num = vim.fn.tabpagenr()
+    local tab_count = #vim.fn.gettabinfo()
+
+    return "Tab "..tab_num.."/"..tab_count
+end
+local lualine_winbar = {
+    lualine_a = {lualine_tab_number, "filename"},
+    lualine_b = {"filetype"},
+    lualine_c = {"fileformat", "diagnostics"},
+    lualine_x = {"encoding"},
+    lualine_y = {"progress"},
+    lualine_z = {"location"},
 }
-globals.airline_section_x=""
-vim.cmd("let g:airline#extensions#tabline#enabled=1")   -- there is no obvious alternative, so we are just running a vimscript command
+require("lualine").setup {
+    options = {
+        icons_enabled = true,
+        theme = "auto",
+        section_separators = { left = "", right = ""},
+        ignore_focus = {},
+        always_divide_middle = true,
+        globalstatus = true,
+        refresh = {
+            statusline = 1000,
+            winbar = 1000,
+        }
+    },
+    sections = {
+        lualine_a = {"mode"},
+        lualine_b = {
+            {
+                "datetime",
+                style = "%H:%M",
+            },
+        },
+        lualine_c = {"branch"},
+        lualine_x = {"searchcount"},
+        lualine_y = {},
+        lualine_z = {
+            {
+                "tabs",
+                mode = 2,
+                path = 1,
+                max_length = (vim.o.columns / 4)*3,
+            },
+        }
+    },
+    inactive_sections = {},
+    winbar = lualine_winbar,
+    inactive_winbar = lualine_winbar,
+    extensions = {}
+}
 
 
 -- nerdtree
@@ -213,23 +301,6 @@ function SwitchNerdTree()
 endfunction
 ]])
 
-
--- nebulous (color theme)
-require("nebulous").setup {
-    variant="night",
-    disable={
-        background=true,
-        endOfBuffer=false,
-        terminal_colors=false,
-    },
-    italic={
-        builtins=true,
-        comments=false,
-        keywords=true,
-        functions=false,
-        variables=false,
-    },
-}
 
 -- nvim-surround
 local nvim_surround=require("nvim-surround")

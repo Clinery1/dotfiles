@@ -1,6 +1,6 @@
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.asm  set ft=nasm")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.s  set ft=asm")
-vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.idea  set ft=markdown wrap linebreak textwidth=120 spell")
+vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.idea  set ft=markdown wrap linebreak textwidth=100 spell")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.toml  set ft=cfg")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.fish  set ft=fish")
 vim.cmd("autocmd BufNewFile,BufRead,VimEnter,BufEnter *.glsl  set ft=glsl")
@@ -26,3 +26,11 @@ vim.cmd("autocmd BufNewFile,BufEnter *.fanasm set ft=sexpression shiftwidth=4 ta
 vim.cmd("autocmd BufNewFile,BufEnter *.htsx set ft=sexpression shiftwidth=4 tabstop=4 commentstring=;%s")
 vim.cmd("autocmd BufNewFile,BufEnter *.cssx set ft=sexpression shiftwidth=4 tabstop=4 commentstring=;%s")
 vim.cmd("autocmd BufNewFile,BufEnter *.sexpr set ft=sexpression shiftwidth=4 tabstop=4 commentstring=;%s")
+
+-- add spelling to markdown files
+vim.api.nvim_create_autocmd({"BufEnter", "BufNewFile", "FileType"}, {
+    pattern = {"*.md"},
+    callback = function()
+        vim.opt_local.spelloptions = "camel"
+    end
+})
