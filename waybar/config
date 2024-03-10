@@ -1,5 +1,9 @@
 // vim:ft=json
 {
+    // enable the bar on startup
+    "mode": "dock",
+    // enable `swaymsg bar *` IPC events
+    "ipc": true,
     "layer": "top",
     "position": "top",
     "height": 20,
@@ -58,6 +62,9 @@
     "sway/workspaces": {
         "format": "{icon} {value}",
         "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "󰝚",
             "urgent": "󰗖",
             "focused": "",
             "default": ""
@@ -82,7 +89,7 @@
         "format-six":   " 󰪣 {free}",
         "format-seven": " 󰪤 {free}",
         "format-eight": " 󰪥 {free}",
-        "states": { 
+        "states": {
             "zero":  0,
             "one":   12.5,
             "two":   25,
@@ -105,7 +112,7 @@
         "format-six":   "  󰪣 {free}",
         "format-seven": "  󰪤 {free}",
         "format-eight": "  󰪥 {free}",
-        "states": { 
+        "states": {
             "zero":  0,
             "one":   12.5,
             "two":   25,
