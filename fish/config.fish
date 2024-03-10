@@ -199,7 +199,7 @@ function wifi
         echo "    wait_ip: waits for an IPv4 to be assigned"
     end
 end
-set WIFI_COMMANDS "scan connect disconnect status"
+set WIFI_COMMANDS "scan connect disconnect status wait_ip"
 complete -c wifi -f
 complete -c wifi -n "not __fish_seen_subcommand_from $WIFI_COMMANDS" -a "$WIFI_COMMANDS"
 function png2pdf
